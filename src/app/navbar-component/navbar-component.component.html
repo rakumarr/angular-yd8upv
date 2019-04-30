@@ -1,0 +1,41 @@
+
+
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+    <span class="navbar-toggler-icon"></span>
+    </button>  
+  <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="home">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="residents">Residents</a>
+      </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="report">Report</a>
+        </li>
+        <li class="nav-item dropdown">    
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Tenant</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Detail</a>
+            <a class="dropdown-item" href="#">Add</a>
+            <a class="dropdown-item" href="#">Edit</a>
+            <a class="dropdown-item" href="#">Delete</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="owners">Owners</a>
+        </li>
+        <li class="nav-item">            
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">My Profile</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Detail</a>
+            <a class="dropdown-item" href="#">Edit</a>
+          </div>
+        </li>
+      </ul>
+  </div> 
+    </nav>
+    <router-outlet></router-outlet>
+    

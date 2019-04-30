@@ -1,0 +1,32 @@
+
+<div *ngIf="!user" class="card text-center">
+  
+  <div class="card-block">
+    <h4 class="card-title">Not signed in</h4>
+    <p class="card-text">Sign in with</p>
+  </div>
+  <div class="card-block">
+    <button class="btn btn-social-icon btn-google" (click)="signInWithGoogle()"><span class="fa fa-google"></span></button>
+  </div>
+</div>
+<div *ngIf="user" class="card text-center">  
+  <div class="card-block">
+  <img class="card-img-top" [src]="user.photoUrl" alt="Card image" style="max-width: 18rem;">
+  </div>
+  <div class="card-block">
+    <h4 class="card-title">{{ user.name }}</h4>
+    <p class="card-text">{{ user.email }}</p>
+  </div>
+  <div *ngIf="apartment" class="card-block">
+    <button class="btn btn-primary">Select Apartment</button>  
+    <button class="btn btn-danger" (click)="signOut()">Sign out</button>
+  </div>
+  <div *ngIf="!apartment" class="card-block">      
+    <button class="btn btn-danger" (click)="signOut()">Sign out</button>
+    <div class="card-block">
+    <h4 class="card-title">Not authorized to proceed further</h4>
+  </div>
+  </div>
+</div>
+
+
