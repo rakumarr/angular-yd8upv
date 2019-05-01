@@ -52,11 +52,7 @@ export class LoginComponent implements OnInit {
 
   apiUserUrl = 'https://rakumarr-project.herokuapp.com/api/user/';
 
-  private getData() {
-    // this.http.get<any[]>(this.apiUrl)
-    //   .subscribe(data => {
-    //     this.apartment = data;
-    //   });
+  private getData() {    
     this.http.post<any[]>(this.apiUserUrl, this.user.idToken)
       .subscribe(data => {
         if (data.length > 0){
@@ -66,6 +62,10 @@ export class LoginComponent implements OnInit {
           this.apartments.push(item.apartmentName);        
         })    
       });
+  }
+
+  public callType(entitlement:Entitlement){
+    console.log(entitlement);
   }
 
 }
