@@ -59,7 +59,9 @@ export class LoginComponent implements OnInit {
     //   });
     this.http.post<any[]>(this.apiUserUrl, this.user.idToken)
       .subscribe(data => {
-        this.entitlement = data;
+        if (data.length > 0){
+          this.entitlement = data;
+        }        
         data.forEach( (item:Entitlement) => {        
           this.apartments.push(item.apartmentName);        
         })    
