@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SocialUser, AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { HttpClient } from '@angular/common/http';
+import { Entitlement } from '../model/entitlement'
 
 
 @Component({
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     // });
   }
  
-  public apartment: String[];
+  public entitlement: Entitlement[];
+  public apartments: String[] = [];
 
   public user: SocialUser;
   private loggedIn: boolean;
@@ -31,6 +33,7 @@ export class LoginComponent implements OnInit {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
       this.user = userData;
       this.loggedIn = (this.user != null); 
+      console.log(this.user.idToken);
       this.getData();     
     });
   }
@@ -39,17 +42,26 @@ export class LoginComponent implements OnInit {
    this.socialAuthService.signOut().then((a) => {
      console.log(a);
      this.user = null;
-     this.apartment = null;
+     this.entitlement = null;
       this.loggedIn = (this.user != null);
    });
   }
 
   apiUrl = 'https://rakumarr-project.herokuapp.com/api/apartments/';
 
+  apiUserUrl = 'https://rakumarr-project.herokuapp.com/api/user/';
+
   private getData() {
-    this.http.get<any[]>(this.apiUrl)
+    // this.http.get<any[]>(this.apiUrl)
+    //   .subscribe(data => {
+    //     this.apartment = data;
+    //   });
+    this.http.post<any[]>(this.apiUserUrl, this.user.idToken)
       .subscribe(data => {
-        console.log(data);
+        this.entitlement = data;
+        data.forEach( (item:Entitlement) => {        
+          this.apartments.push(item.apartmentName);        
+        })    
       });
   }
 

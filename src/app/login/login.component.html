@@ -17,11 +17,19 @@
     <h4 class="card-title">{{ user.name }}</h4>
     <p class="card-text">{{ user.email }}</p>
   </div>
-  <div *ngIf="apartment" class="card-block">
-    <button class="btn btn-primary">Select Apartment</button>  
+  <div *ngIf="entitlement" class="card-block">
+     
+    <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          Select Apartment
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="#" *ngFor="let apartment of apartments" (change)="callType(t.value)">{{apartment}}</a>          
+        </div>
+    </div>
     <button class="btn btn-danger" (click)="signOut()">Sign out</button>
   </div>
-  <div *ngIf="!apartment" class="card-block">      
+  <div *ngIf="!entitlement" class="card-block">      
     <button class="btn btn-danger" (click)="signOut()">Sign out</button>
     <div class="card-block">
     <h4 class="card-title">Not authorized to proceed further</h4>
