@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
  
   public entitlement: Entitlement[];
-  public apartments: String[] = [];
+  public apartments: String[];
 
   public user: SocialUser;
   private loggedIn: boolean;
@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
      console.log(a);
      this.user = null;
      this.entitlement = null;
+     this.apartments = null;
       this.loggedIn = (this.user != null);
    });
   }
