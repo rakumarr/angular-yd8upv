@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
  
   // public entitlement: Entitlement[];
   public apartments: String[] =[];
-  private entitlement: BehaviorSubject<Entitlement[]> = new BehaviorSubject<Entitlement[]>(null);
+  private entitlement: Entitlement[] = [];
 
 
   public user: SocialUser;
@@ -40,14 +40,14 @@ export class LoginComponent implements OnInit {
 
   signInWithGoogle(): void {
     this.authService.signInWithGoogle();
-    this.userInfo$.subscribe(a=> {console.log(a)})
-    if(this.isLoggedIn$ && this.userInfo$){
-      console.log("observer true");
-      console.log(this.userInfo$);
-      console.log(this.user);
-      console.log("observer true");
-      // this.getData();
-    }
+    this.userInfo$.subscribe((value:SocialUser) => {
+      
+      if(value!=null){
+        this.user = value;
+        this.getData();
+      }
+      });
+    
     // this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
     //   this.user = userData;
     //   this.loggedIn = (this.user != null); 
@@ -75,8 +75,9 @@ export class LoginComponent implements OnInit {
     this.http.post<any[]>(this.apiUserUrl, this.user.idToken)
       .subscribe(data => {
         if (data.length > 0){
-          // this.entitlement = data;
+          this.entitlement = data;
         }        
+        console.log(this.entitlement);
         data.forEach( (item:Entitlement) => {        
           this.apartments.push(item.apartmentName);        
         })    

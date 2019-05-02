@@ -19,7 +19,7 @@
     <p class="card-text">{{ user.email }}</p>
   </div>
   </div>
-  <div *ngIf="entitlement | async" class="card-block">
+  <div *ngIf="entitlement.length >0" class="card-block">
      
     <div class="dropdown">
         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -31,7 +31,7 @@
     </div>
     <button class="btn btn-danger" (click)="signOut()">Sign out</button>
   </div>
-  <div *ngIf="!(entitlement$ | async)" class="card-block">      
+  <div *ngIf="entitlement.length ==0" class="card-block">      
     <button class="btn btn-danger" (click)="signOut()">Sign out</button>
     <div class="card-block">
     <h4 class="card-title">Not authorized to proceed further</h4>

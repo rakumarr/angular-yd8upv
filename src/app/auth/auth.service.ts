@@ -21,17 +21,14 @@ export class AuthenticateService {
   signInWithGoogle(): void {
     this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
       this.loggedIn.next(true);
-      this.user.next(userData);
-      console.log(this.user);
-      console.log(userData.idToken);          
+      this.user.next(userData);                
     });
   }
 
   signOut(){    
    this.socialAuthService.signOut().then((user) => {
      this.loggedIn.next(false);
-     this.user.next(null);
-     console.log(user);     
+     this.user.next(null); 
    });
   }
 
