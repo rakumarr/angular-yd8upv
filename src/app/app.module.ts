@@ -14,7 +14,8 @@ import { HomeComponent } from './home/home.component';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-// import { AuthService } from './auth/auth.service';
+import { AuthenticateService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
 
 
 // const config = new AuthServiceConfig ([{
@@ -37,6 +38,6 @@ export function provideConfig(){
   bootstrap:    [ AppComponent ],
   providers: [{
     provide: AuthServiceConfig, useFactory: provideConfig
-  }]
+  }, AuthenticateService, AuthGuard]
 })
 export class AppModule { }

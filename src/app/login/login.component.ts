@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { SocialUser, AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { Entitlement } from '../model/entitlement'
-
+import { AuthenticateService } from './../auth/auth.service';
+import { Observable } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -21,31 +23,48 @@ export class LoginComponent implements OnInit {
     // });
   }
  
-  public entitlement: Entitlement[];
+  // public entitlement: Entitlement[];
   public apartments: String[] =[];
+  private entitlement: BehaviorSubject<Entitlement[]> = new BehaviorSubject<Entitlement[]>(null);
+
 
   public user: SocialUser;
-  private loggedIn: boolean;
+  // private loggedIn: boolean;
+  isLoggedIn$: Observable<boolean>;
+  userInfo$: Observable<SocialUser>;
 
-  constructor(private socialAuthService: AuthService, private http: HttpClient) {}
+  constructor(private authService: AuthenticateService, private http: HttpClient) {
+    this.isLoggedIn$ = this.authService.isLoggedIn;
+    this.userInfo$ = this.authService.userInfo;
+  }
 
   signInWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
-      this.user = userData;
-      this.loggedIn = (this.user != null); 
-      console.log(this.user.idToken);
-      this.getData();     
-    });
+    this.authService.signInWithGoogle();
+    this.userInfo$.subscribe(a=> {console.log(a)})
+    if(this.isLoggedIn$ && this.userInfo$){
+      console.log("observer true");
+      console.log(this.userInfo$);
+      console.log(this.user);
+      console.log("observer true");
+      // this.getData();
+    }
+    // this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
+    //   this.user = userData;
+    //   this.loggedIn = (this.user != null); 
+    //   console.log(this.user.idToken);
+    //   this.getData();     
+    // });
   }
 
   signOut(){    
-   this.socialAuthService.signOut().then((a) => {
-     console.log(a);
-     this.user = null;
-     this.entitlement = null;
-     this.apartments = [];
-      this.loggedIn = (this.user != null);
-   });
+    this.authService.signOut();
+  //  this.socialAuthService.signOut().then((a) => {
+  //    console.log(a);
+  //    this.user = null;
+  //    this.entitlement = null;
+  //    this.apartments = [];
+  //     this.loggedIn = (this.user != null);
+  //  });
   }
 
   apiUrl = 'https://rakumarr-project.herokuapp.com/api/apartments/';
@@ -56,7 +75,7 @@ export class LoginComponent implements OnInit {
     this.http.post<any[]>(this.apiUserUrl, this.user.idToken)
       .subscribe(data => {
         if (data.length > 0){
-          this.entitlement = data;
+          // this.entitlement = data;
         }        
         data.forEach( (item:Entitlement) => {        
           this.apartments.push(item.apartmentName);        
