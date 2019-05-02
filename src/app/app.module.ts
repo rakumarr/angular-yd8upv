@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider } from 'angularx-social-login';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
+// import { AuthService } from './auth/auth.service';
 
 
 // const config = new AuthServiceConfig ([{
