@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
 
     // console.log(this.userInfo);
     // this.userData.next(this.userInfo); 
-    // this.router.navigate(['/home']);
+    this.router.navigate(['/home']);
   }
 
 }
