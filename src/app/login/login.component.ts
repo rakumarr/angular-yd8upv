@@ -51,8 +51,9 @@ export class LoginComponent implements OnInit {
         this.userInfo.setSocialUser(value);
         // this.getData();
       }
-      });
-      this.entitlement$.subscribe((data:Entitlement[]) => {
+    });
+    
+    this.entitlement$.subscribe((data:Entitlement[]) => {
         if (data.length > 0){
           this.entitlement = data;
         }        
@@ -60,7 +61,7 @@ export class LoginComponent implements OnInit {
         data.forEach( (item:Entitlement) => {        
           this.apartments.push(item.apartmentName);        
         })
-      });
+    });
 
   }
 
