@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { UserInfo } from '../model/user-info';
 import { Entitlement } from '../model/entitlement';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthenticateService {
@@ -26,7 +27,7 @@ export class AuthenticateService {
     return this.entitlement.asObservable();
   }
 
-  get userEntitlmentInfo(){
+  public userEntitlmentInfo(): Observable<UserInfo>{
     return this.userEntitlement.asObservable();
   }
 
@@ -43,6 +44,7 @@ export class AuthenticateService {
      this.loggedIn.next(false);
      this.user.next(null); 
      this.entitlement.next(null); 
+     this.userEntitlement.next(null); 
    });
   }
 

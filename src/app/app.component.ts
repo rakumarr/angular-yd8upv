@@ -13,12 +13,12 @@ import { AuthenticateService } from './auth/auth.service';
 export class AppComponent  {
   name = 'Welcome to Bubeau!!';
 
-  userInfo$: Observable<UserInfo>;
+  userInfo: UserInfo;
 
 
   constructor(private authService: AuthenticateService){
-    this.authService.userEntitlmentInfo.subscribe((data:UserInfo) => {
-      console.log(data);
+    this.authService.userEntitlmentInfo().subscribe((data:UserInfo) => {
+      this.userInfo = data;
     })
   };
   
