@@ -14,16 +14,8 @@ export class AppComponent  {
 
   userInfo$: Observable<UserInfo>;
 
-  public showNavBar: Boolean = null;
 
-  
-
-  constructor(private loginComponent:LoginComponent){
-    this.userInfo$ = this.loginComponent.getUserInfo();
-
-    this.userInfo$.subscribe((userInfo:UserInfo) =>{
-      this.showNavBar = userInfo != null;
-    });
+  constructor(){
   };
   
 }

@@ -38,6 +38,6 @@ export function provideConfig(){
   bootstrap:    [ AppComponent ],
   providers: [{
     provide: AuthServiceConfig, useFactory: provideConfig
-  }, AuthenticateService, AuthGuard, LoginComponent]
+  }, AuthenticateService, AuthGuard]
 })
 export class AppModule { }

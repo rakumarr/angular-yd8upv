@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
 
   isLoggedIn$: Observable<boolean>;
   userInfo$: Observable<SocialUser>;
+  entitlement$: Observable<Entitlement[]>;
 
   private userData: BehaviorSubject<UserInfo> = new BehaviorSubject<UserInfo>(null);
 
@@ -38,6 +39,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthenticateService, private http: HttpClient, private router: Router) {
     this.isLoggedIn$ = this.authService.isLoggedIn;
     this.userInfo$ = this.authService.userInfo;
+    this.entitlement$ = this.authService.userEntitlements;
   }
 
   signInWithGoogle(): void {
@@ -47,8 +49,17 @@ export class LoginComponent implements OnInit {
       if(value!=null){
         this.user = value;
         this.userInfo.setSocialUser(value);
-        this.getData();
+        // this.getData();
       }
+      });
+      this.entitlement$.subscribe((data:Entitlement[]) => {
+        if (data.length > 0){
+          this.entitlement = data;
+        }        
+        console.log(this.entitlement);
+        data.forEach( (item:Entitlement) => {        
+          this.apartments.push(item.apartmentName);        
+        })
       });
 
   }
