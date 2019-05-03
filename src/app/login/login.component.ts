@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SocialUser, AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { Entitlement } from '../model/entitlement'
+import { UserInfo } from '../model/user-info'
 import { AuthenticateService } from './../auth/auth.service';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
   public apartments: String[] =[];
   private entitlement: Entitlement[] = [];
 
-
+  private userInfo: UserInfo = new UserInfo();
   public user: SocialUser;
   // private loggedIn: boolean;
   isLoggedIn$: Observable<boolean>;
@@ -44,6 +45,7 @@ export class LoginComponent implements OnInit {
       
       if(value!=null){
         this.user = value;
+        this.userInfo.setSocialUser(value);
         this.getData();
       }
       });
@@ -85,7 +87,8 @@ export class LoginComponent implements OnInit {
   }
 
   public callType(entitlement:Entitlement){
-    console.log(entitlement);
+    this.userInfo.setEntitlement(entitlement);
+    console.log(this.userInfo);
   }
 
 }
