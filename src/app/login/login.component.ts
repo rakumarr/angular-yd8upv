@@ -54,13 +54,15 @@ export class LoginComponent implements OnInit {
     });
     
     this.entitlement$.subscribe((data:Entitlement[]) => {
-        if (data.length > 0){
-          this.entitlement = data;
-        }        
-        console.log(this.entitlement);
+        if (data==null || data.length == 0){
+          this.entitlement = [];
+        } else {
+          console.log(this.entitlement);
         data.forEach( (item:Entitlement) => {        
           this.apartments.push(item.apartmentName);        
         })
+        }    
+        
     });
 
   }
