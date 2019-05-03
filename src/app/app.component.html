@@ -4,10 +4,9 @@
     <h1>{{ name }}</h1>
   </a>
 </nav>
-<div *ngIf="isLoggedIn$ | async">
+<div *ngIf="showNavBar">
   <app-navbar-component> </app-navbar-component>
 </div>
-
 
   <router-outlet></router-outlet>
 

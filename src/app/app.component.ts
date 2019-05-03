@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { LoginComponent } from './login/login.component';
+import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { UserInfo } from './model/user-info';
 
 @Component({
   selector: 'my-app',
@@ -9,9 +12,18 @@ import { LoginComponent } from './login/login.component';
 export class AppComponent  {
   name = 'Welcome to Bubeau!!';
 
-  public showNavBar: Boolean;
+  userInfo$: Observable<UserInfo>;
+
+  public showNavBar: Boolean = null;
+
+  
 
   constructor(private loginComponent:LoginComponent){
+    this.userInfo$ = this.loginComponent.getUserInfo();
+
+    this.userInfo$.subscribe((userInfo:UserInfo) =>{
+      this.showNavBar = userInfo != null;
+    });
   };
   
 }

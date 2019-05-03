@@ -29,6 +29,12 @@ export class LoginComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
   userInfo$: Observable<SocialUser>;
 
+  private userData: BehaviorSubject<UserInfo> = new BehaviorSubject<UserInfo>(null);
+
+  getUserInfo(){
+    return this.userData.asObservable();
+  }
+
   constructor(private authService: AuthenticateService, private http: HttpClient, private router: Router) {
     this.isLoggedIn$ = this.authService.isLoggedIn;
     this.userInfo$ = this.authService.userInfo;
@@ -68,9 +74,10 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  public callType(entitlement:Entitlement){
+  public callType(entitlement:Entitlement){    
     this.userInfo.setEntitlement(entitlement);
     console.log(this.userInfo);
+    this.userData.next(this.userInfo); 
     this.router.navigate(['/home']);
   }
 
