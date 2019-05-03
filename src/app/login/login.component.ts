@@ -17,22 +17,15 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   ngOnInit() {
-    // this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
-    //   console.log("inside user data");
-    //   this.user = userData;
-    //   this.loggedIn = (this.user != null);
-    //   console.log(this.user);
-    //   this.signInText = "Sign out";
-    // });
+   
   }
  
-  // public entitlement: Entitlement[];
   public apartments: String[] =[];
   private entitlement: Entitlement[] = [];
 
   private userInfo: UserInfo = new UserInfo();
   public user: SocialUser;
-  // private loggedIn: boolean;
+
   isLoggedIn$: Observable<boolean>;
   userInfo$: Observable<SocialUser>;
 
