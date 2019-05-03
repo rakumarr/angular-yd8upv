@@ -65,29 +65,9 @@ export class LoginComponent implements OnInit {
     this.authService.signOut();
   }
 
-  // apiUrl = 'https://rakumarr-project.herokuapp.com/api/apartments/';
-
-  // apiUserUrl = 'https://rakumarr-project.herokuapp.com/api/user/';
-
-  // private getData() {    
-  //   this.http.post<any[]>(this.apiUserUrl, this.user.idToken)
-  //     .subscribe(data => {
-  //       if (data.length > 0){
-  //         this.entitlement = data;
-  //       }        
-  //       console.log(this.entitlement);
-  //       data.forEach( (item:Entitlement) => {        
-  //         this.apartments.push(item.apartmentName);        
-  //       })    
-  //     });
-  // }
-
   public setUserInfo(entitlement:Entitlement){    
     this.userInfo.setEntitlement(entitlement);
     this.authService.setUserEntitlementInfo(this.userInfo);
-
-    // console.log(this.userInfo);
-    // this.userData.next(this.userInfo); 
     this.router.navigate(['/home']);
   }
 
