@@ -85,7 +85,7 @@ export class LoginComponent implements OnInit {
 
   public setUserInfo(entitlement:Entitlement){    
     this.userInfo.setEntitlement(entitlement);
-    this.authService.userEntitlementInfo(this.userInfo);
+    this.authService.setUserEntitlementInfo(this.userInfo);
 
     // console.log(this.userInfo);
     // this.userData.next(this.userInfo); 

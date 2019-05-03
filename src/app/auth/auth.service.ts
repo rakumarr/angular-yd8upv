@@ -57,7 +57,7 @@ export class AuthenticateService {
       });
   }
 
-  set userEntitlementInfo(userInfo: UserInfo){    
+  set setUserEntitlementInfo(userInfo: UserInfo){    
     this.userEntitlement.next(userInfo);
   }
 
