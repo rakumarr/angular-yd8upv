@@ -7,6 +7,8 @@ import { AuthenticateService } from './../auth/auth.service';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -34,7 +36,7 @@ export class LoginComponent implements OnInit {
   isLoggedIn$: Observable<boolean>;
   userInfo$: Observable<SocialUser>;
 
-  constructor(private authService: AuthenticateService, private http: HttpClient) {
+  constructor(private authService: AuthenticateService, private http: HttpClient, private router: Router) {
     this.isLoggedIn$ = this.authService.isLoggedIn;
     this.userInfo$ = this.authService.userInfo;
   }
@@ -49,24 +51,11 @@ export class LoginComponent implements OnInit {
         this.getData();
       }
       });
-    
-    // this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
-    //   this.user = userData;
-    //   this.loggedIn = (this.user != null); 
-    //   console.log(this.user.idToken);
-    //   this.getData();     
-    // });
+
   }
 
   signOut(){    
     this.authService.signOut();
-  //  this.socialAuthService.signOut().then((a) => {
-  //    console.log(a);
-  //    this.user = null;
-  //    this.entitlement = null;
-  //    this.apartments = [];
-  //     this.loggedIn = (this.user != null);
-  //  });
   }
 
   apiUrl = 'https://rakumarr-project.herokuapp.com/api/apartments/';
@@ -89,6 +78,7 @@ export class LoginComponent implements OnInit {
   public callType(entitlement:Entitlement){
     this.userInfo.setEntitlement(entitlement);
     console.log(this.userInfo);
+    this.router.navigate(['/home']);
   }
 
 }
