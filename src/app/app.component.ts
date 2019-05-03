@@ -3,6 +3,7 @@ import { LoginComponent } from './login/login.component';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
 import { UserInfo } from './model/user-info';
+import { AuthenticateService } from './auth/auth.service';
 
 @Component({
   selector: 'my-app',
@@ -15,7 +16,10 @@ export class AppComponent  {
   userInfo$: Observable<UserInfo>;
 
 
-  constructor(){
+  constructor(private authService: AuthenticateService){
+    this.userInfo$.subscribe((data:UserInfo) => {
+      console.log(data);
+    })
   };
   
 }
