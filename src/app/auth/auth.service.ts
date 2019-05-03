@@ -9,8 +9,8 @@ import { Entitlement } from '../model/entitlement';
 export class AuthenticateService {
   private loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private user: BehaviorSubject<SocialUser> = new BehaviorSubject<SocialUser>(null);
-  private userData: BehaviorSubject<UserInfo> = new BehaviorSubject<UserInfo>(null);
   private entitlement: BehaviorSubject<Entitlement[]> = new BehaviorSubject<Entitlement[]>(null);
+  private userEntitlement: BehaviorSubject<UserInfo> = new BehaviorSubject<UserInfo>(null);
 
   constructor(private socialAuthService: AuthService, private http: HttpClient) { }
 
@@ -22,26 +22,27 @@ export class AuthenticateService {
     return this.user.asObservable();
   }
 
-  get userEntitlementData(){
-    return this.userData.asObservable();
-  }
-
-  get userEntitlements(){
+  get entitlements(){
     return this.entitlement.asObservable();
   }
 
+  get userEntitlmentInfo(){
+    return this.userEntitlement.asObservable();
+  }
+
   signInWithGoogle(): void {
-    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((userData) => {
+    this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID).then((data) => {
       this.loggedIn.next(true);
-      this.user.next(userData); 
-      this.getData(userData);               
+      this.user.next(data); 
+      this.getData(data);               
     });
   }
 
-  signOut(){    
-   this.socialAuthService.signOut().then((user) => {
+  signOut(): void {    
+   this.socialAuthService.signOut().then((data) => {
      this.loggedIn.next(false);
      this.user.next(null); 
+     this.entitlement.next(null); 
    });
   }
 
@@ -49,9 +50,15 @@ export class AuthenticateService {
 
   private getData(userData:SocialUser) {    
     this.http.post<any[]>(this.apiUserUrl, userData.idToken)
-      .subscribe(data => {   
+      .subscribe(data => { 
+        console.log(data);  
         this.entitlement.next(data);  
+        console.log(this.entitlement);
       });
+  }
+
+  set userEntitlementInfo(userInfo: UserInfo){    
+    this.userEntitlement.next(userInfo);
   }
 
 }

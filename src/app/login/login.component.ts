@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthenticateService, private http: HttpClient, private router: Router) {
     this.isLoggedIn$ = this.authService.isLoggedIn;
     this.userInfo$ = this.authService.userInfo;
-    this.entitlement$ = this.authService.userEntitlements;
+    this.entitlement$ = this.authService.entitlements;
   }
 
   signInWithGoogle(): void {
@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
       if(value!=null){
         this.user = value;
         this.userInfo.setSocialUser(value);
-        // this.getData();
       }
     });
     
@@ -57,12 +56,8 @@ export class LoginComponent implements OnInit {
         if (data==null || data.length == 0){
           this.entitlement = [];
         } else {
-          console.log(this.entitlement);
-        data.forEach( (item:Entitlement) => {        
-          this.apartments.push(item.apartmentName);        
-        })
-        }    
-        
+          this.entitlement = data;
+        }  
     });
 
   }
@@ -71,28 +66,30 @@ export class LoginComponent implements OnInit {
     this.authService.signOut();
   }
 
-  apiUrl = 'https://rakumarr-project.herokuapp.com/api/apartments/';
+  // apiUrl = 'https://rakumarr-project.herokuapp.com/api/apartments/';
 
-  apiUserUrl = 'https://rakumarr-project.herokuapp.com/api/user/';
+  // apiUserUrl = 'https://rakumarr-project.herokuapp.com/api/user/';
 
-  private getData() {    
-    this.http.post<any[]>(this.apiUserUrl, this.user.idToken)
-      .subscribe(data => {
-        if (data.length > 0){
-          this.entitlement = data;
-        }        
-        console.log(this.entitlement);
-        data.forEach( (item:Entitlement) => {        
-          this.apartments.push(item.apartmentName);        
-        })    
-      });
-  }
+  // private getData() {    
+  //   this.http.post<any[]>(this.apiUserUrl, this.user.idToken)
+  //     .subscribe(data => {
+  //       if (data.length > 0){
+  //         this.entitlement = data;
+  //       }        
+  //       console.log(this.entitlement);
+  //       data.forEach( (item:Entitlement) => {        
+  //         this.apartments.push(item.apartmentName);        
+  //       })    
+  //     });
+  // }
 
-  public callType(entitlement:Entitlement){    
+  public setUserInfo(entitlement:Entitlement){    
     this.userInfo.setEntitlement(entitlement);
-    console.log(this.userInfo);
-    this.userData.next(this.userInfo); 
-    this.router.navigate(['/home']);
+    this.authService.userEntitlementInfo(this.userInfo);
+
+    // console.log(this.userInfo);
+    // this.userData.next(this.userInfo); 
+    // this.router.navigate(['/home']);
   }
 
 }

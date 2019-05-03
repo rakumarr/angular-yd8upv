@@ -26,7 +26,7 @@
           Select Apartment
         </button>
         <div class="dropdown-menu">
-          <a class="dropdown-item" *ngFor="let entitlement of entitlement" (click)="callType(entitlement)">{{entitlement.apartmentName}}</a>
+          <a class="dropdown-item" *ngFor="let entitlement of entitlement" (click)="setUserInfo(entitlement)">{{entitlement.apartmentName}}</a>
         </div>
     </div>
     <button class="btn btn-danger" (click)="signOut()">Sign out</button>
