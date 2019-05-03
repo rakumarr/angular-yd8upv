@@ -46,7 +46,7 @@ export class AuthenticateService {
      this.user.next(null); 
      this.entitlement.next(null); 
      this.userEntitlement.next(null); 
-     this.router.navigate(['']); 
+     this.router.navigate(['login']); 
    });
   }
 
