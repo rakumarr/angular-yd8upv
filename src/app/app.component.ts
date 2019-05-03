@@ -17,7 +17,7 @@ export class AppComponent  {
 
 
   constructor(private authService: AuthenticateService){
-    this.userInfo$.subscribe((data:UserInfo) => {
+    this.UserInfo.subscribe((data:UserInfo) => {
       console.log(data);
     })
   };
