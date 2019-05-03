@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { UserInfo } from '../model/user-info';
 import { Entitlement } from '../model/entitlement';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class AuthenticateService {
@@ -13,7 +14,7 @@ export class AuthenticateService {
   private entitlement: BehaviorSubject<Entitlement[]> = new BehaviorSubject<Entitlement[]>(null);
   private userEntitlement: BehaviorSubject<UserInfo> = new BehaviorSubject<UserInfo>(null);
 
-  constructor(private socialAuthService: AuthService, private http: HttpClient) { }
+  constructor(private socialAuthService: AuthService, private http: HttpClient, private router: Router) { }
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
@@ -45,6 +46,7 @@ export class AuthenticateService {
      this.user.next(null); 
      this.entitlement.next(null); 
      this.userEntitlement.next(null); 
+     this.router.navigate(['']); 
    });
   }
 

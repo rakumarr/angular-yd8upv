@@ -6,7 +6,6 @@ import { UserInfo } from '../model/user-info'
 import { AuthenticateService } from './../auth/auth.service';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
-
 import { Router } from '@angular/router';
 
 @Component({
