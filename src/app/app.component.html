@@ -4,7 +4,10 @@
     <h1>{{ name }}</h1>
   </a>
 </nav>
-<app-navbar-component> </app-navbar-component>
+<div *ngIf="isLoggedIn$ | async">
+  <app-navbar-component> </app-navbar-component>
+</div>
+
 
   <router-outlet></router-outlet>
 
