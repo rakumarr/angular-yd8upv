@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticateService } from './../auth/auth.service';
 import { UserInfo } from '../model/user-info';
+import { NavItem } from './nav-item';
 
 @Component({
   selector: 'app-navbar-component',
@@ -25,5 +26,30 @@ export class NavbarComponentComponent implements OnInit {
     console.log("test");
     this.authService.signOut();
   }
+
+  home: NavItem = {
+    displayName: 'Home'
+  }
+
+  residents: NavItem = {
+    displayName: 'Residents'
+  }
+
+  report: NavItem = {
+    displayName: 'Report'
+  }
+ 
+  tenant: NavItem = {
+    displayName: 'Tenant'
+  }
+
+  owners: NavItem = {
+    displayName: 'Owners'
+  }
+
+  myprofile: NavItem = {
+    displayName: 'My Profile'
+  }
+
 
 }
