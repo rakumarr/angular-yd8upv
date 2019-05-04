@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthenticateService } from './auth/auth.service';
 import { AuthGuard } from './auth/auth.guard';
+import { ApartmentService } from './service/apartment.service';
 
 
 // const config = new AuthServiceConfig ([{
@@ -38,6 +39,6 @@ export function provideConfig(){
   bootstrap:    [ AppComponent ],
   providers: [{
     provide: AuthServiceConfig, useFactory: provideConfig
-  }, AuthenticateService, AuthGuard]
+  }, AuthenticateService, AuthGuard, ApartmentService]
 })
 export class AppModule { }

@@ -1,14 +1,19 @@
 <table class="table table-bordered">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Flat</th>
+      <th scope="col">Name</th>
+      <th scope="col">Contact</th>
+      <th scope="col">Owner</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
+    <tr *ngFor="let resident of residents">
+      <th>{{resident.flat}}</th>
+      <td>{{resident.name}}</td>
+      <td>{{resident.contact}}</td>
+      <td>{{resident.owner}}</td>
+    <!-- <tr>
       <th scope="row">1</th>
       <td>Mark</td>
       <td>Otto</td>
@@ -24,6 +29,7 @@
       <th scope="row">3</th>
       <td colspan="2">Larry the Bird</td>
       <td>@twitter</td>
+    </tr> -->
     </tr>
   </tbody>
 </table>
