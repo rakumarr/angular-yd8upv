@@ -19,4 +19,12 @@ export class UserInfo {
     this.entitlement = entitlement;
   }
 
+  public getSocialUser():SocialUser{
+    return this.socialUser;
+  }
+
+  public getEntitlement():Entitlement{
+    return this.entitlement;
+  }
+
 }

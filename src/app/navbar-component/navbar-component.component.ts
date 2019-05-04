@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticateService } from './../auth/auth.service';
+import { UserInfo } from '../model/user-info';
 
 @Component({
   selector: 'app-navbar-component',
@@ -8,7 +9,14 @@ import { AuthenticateService } from './../auth/auth.service';
 })
 export class NavbarComponentComponent implements OnInit {
 
-  constructor(private authService: AuthenticateService) { }
+  navbar: String[] = null;
+
+  constructor(private authService: AuthenticateService) { 
+    this.authService.userEntitlmentInfo().subscribe((userInfo:UserInfo) => {      
+      this.navbar = userInfo.getEntitlement()['authorization']['allowedActions'];
+      console.log(this.navbar);
+    })
+  }
 
   ngOnInit() {
   }

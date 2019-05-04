@@ -55,7 +55,7 @@ export class AuthenticateService {
   private getData(userData:SocialUser) {    
     this.http.post<any[]>(this.apiUserUrl, userData.idToken)
       .subscribe(data => { 
-        console.log(data);  
+        console.log(data);         
         this.entitlement.next(data);  
         console.log(this.entitlement);
       });
