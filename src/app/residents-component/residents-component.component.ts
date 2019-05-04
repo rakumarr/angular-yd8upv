@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticateService } from './../auth/auth.service';
-import { UserInfo } from '../model/user-info';
 import { Residents } from '../model/residents';
 import { ApartmentService } from './../service/apartment.service';
 
@@ -11,12 +9,7 @@ import { ApartmentService } from './../service/apartment.service';
 })
 export class ResidentsComponentComponent implements OnInit {
 
-  // userInfo: UserInfo;
-
-  constructor(private authService: AuthenticateService, private aptService: ApartmentService) {
-    // this.authService.userEntitlmentInfo().subscribe((userInfo:UserInfo) =>{
-    //   this.userInfo = userInfo;
-    // })
+  constructor(private aptService: ApartmentService) {
     this.aptService.residentsObservable.subscribe((residents:Residents[]) =>{
       this.residents = residents;
     });

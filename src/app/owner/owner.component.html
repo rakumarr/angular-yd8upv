@@ -1,3 +1,18 @@
-<p>
-owner works!
-</p>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Flat</th>
+      <th scope="col">Name</th>
+      <th scope="col">Contact</th>
+      <th scope="col">Resident</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let owner of owners">
+      <th>{{owner.flat}}</th>
+      <td>{{owner.name}}</td>
+      <td></td>
+      <td>{{owner.resident}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -5,12 +5,14 @@ import { UserInfo } from '../model/user-info';
 import { Residents } from '../model/residents';
 import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs';
+import { Owner } from '../model/owner';
 
 
 @Injectable()
 export class ApartmentService {
 
   private residents: BehaviorSubject<Residents[]> = new BehaviorSubject<Residents[]>(null);
+  private owners: BehaviorSubject<Owner[]> = new BehaviorSubject<Owner[]>(null);
 
   userInfo: UserInfo = null;
 
@@ -26,13 +28,27 @@ export class ApartmentService {
     return this.residents.asObservable();
   }
 
-  apiUserUrl = 'https://rakumarr-project.herokuapp.com/api/residents/';
+  residentUrl = 'https://rakumarr-project.herokuapp.com/api/residents/';
 
   public getResidents() {    
-    this.http.get<any[]>(this.apiUserUrl +'/'+this.userInfo.getEntitlement().apartmentId)
+    this.http.get<any[]>(this.residentUrl +'/'+this.userInfo.getEntitlement().apartmentId)
       .subscribe(data => { 
-        console.log(data);         
         this.residents.next(data);  
+      });
+  }
+
+  get ownerObservable() {
+    //call the http call
+    this.getOwners();
+    return this.owners.asObservable();
+  }
+
+  ownersUrl = 'https://rakumarr-project.herokuapp.com/api/owners/';
+
+  public getOwners() {    
+    this.http.get<any[]>(this.ownersUrl +'/'+this.userInfo.getEntitlement().apartmentId)
+      .subscribe(data => { 
+        this.owners.next(data);  
       });
   }
 
