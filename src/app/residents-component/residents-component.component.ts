@@ -17,7 +17,7 @@ export class ResidentsComponentComponent implements OnInit {
     // this.authService.userEntitlmentInfo().subscribe((userInfo:UserInfo) =>{
     //   this.userInfo = userInfo;
     // })
-    this.aptService.getResidentsObservable().subscribe((residents:Residents[]) =>{
+    this.aptService.residentsObservable.subscribe((residents:Residents[]) =>{
       this.residents = residents;
     });
   }

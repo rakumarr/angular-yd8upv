@@ -20,7 +20,7 @@ export class ApartmentService {
     })
   }
 
-  get getResidentsObservable() {
+  get residentsObservable() {
     //call the http call
     this.getResidents();
     return this.residents.asObservable();
