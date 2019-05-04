@@ -10,46 +10,63 @@ import { NavItem } from './nav-item';
 })
 export class NavbarComponentComponent implements OnInit {
 
-  navbar: String[] = null;
+  navbar: NavItem[] = [];
 
   constructor(private authService: AuthenticateService) { 
-    this.authService.userEntitlmentInfo().subscribe((userInfo:UserInfo) => {      
-      this.navbar = userInfo.getEntitlement()['authorization']['allowedActions'];
-      console.log(this.navbar);
+    this.authService.userEntitlmentInfo().subscribe((userInfo:UserInfo) => {   
+      let navItems = userInfo.getEntitlement()['authorization']['allowedActions'];
+      this.navbar = [];
+      if(navItems.length > 0){
+       for (var navItem in this.navBarItems){
+        console.log(this.navBarItems[navItem]['name']);
+        if(navItems.includes(this.navBarItems[navItem]['name'])){
+          this.navbar.push(this.navBarItems[navItem]);
+        }        
+      }
+    } 
     })
   }
 
   ngOnInit() {
   }
-
   public logout(){
     console.log("test");
     this.authService.signOut();
   }
 
-  home: NavItem = {
-    displayName: 'Home'
-  }
+  navBarItems: NavItem[] = [
+  {
+    displayName: 'Home',
+    name: 'home',
+    route: 'home'
+  },
+  {
+    displayName: 'Residents',
+    name: 'residents',
+    route: 'residents'
+  },
+  {
+    displayName: 'Report',
+    name: 'report',
+    route: 'report'
+  },
+  {
+    displayName: 'Tenant',
+    name: 'tenant',
+    route: 'tenant'
+  },
 
-  residents: NavItem = {
-    displayName: 'Residents'
-  }
+   {
+    displayName: 'Owners',
+    name: 'owners',
+    route: 'owners'
+  },
 
-  report: NavItem = {
-    displayName: 'Report'
+  {
+    displayName: 'My Profile',
+    name: 'myprofile',
+    route: 'myprofile'
   }
- 
-  tenant: NavItem = {
-    displayName: 'Tenant'
-  }
-
-  owners: NavItem = {
-    displayName: 'Owners'
-  }
-
-  myprofile: NavItem = {
-    displayName: 'My Profile'
-  }
-
+  ]
 
 }
