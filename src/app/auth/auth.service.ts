@@ -50,7 +50,7 @@ export class AuthenticateService {
    });
   }
 
-   apiUserUrl = 'https://rakumarr-project.herokuapp.com/api/user/';
+  apiUserUrl = 'https://rakumarr-project.herokuapp.com/api/user/';
 
   private getData(userData:SocialUser) {    
     this.http.post<any[]>(this.apiUserUrl, userData.idToken)

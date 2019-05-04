@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticateService } from './../auth/auth.service';
+import { UserInfo } from '../model/user-info';
 
 @Component({
   selector: 'app-residents-component',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResidentsComponentComponent implements OnInit {
 
-  constructor() { }
+  userInfo: UserInfo;
+
+  constructor(private authService: AuthenticateService) {
+    this.authService.userEntitlmentInfo().subscribe((userInfo:UserInfo) =>{
+      this.userInfo = userInfo;
+    })
+   }
 
   ngOnInit() {
   }
