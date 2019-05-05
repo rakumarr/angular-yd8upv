@@ -19,10 +19,16 @@ export class ApartmentService {
   constructor(private authService: AuthenticateService, private http: HttpClient) {
     this.authService.userEntitlmentInfo().subscribe((userInfo:UserInfo) =>{
       this.userInfo = userInfo;
+      let headerDict  = {
+  'X-AuthToken': this.userInfo.getSocialUser().idToken
+    } ;
+      this.requestOptions = {                                                                                                                                                                                 
+  headers: new HttpHeaders(headerDict), 
+};
     })
   }
 
-  
+  requestOptions  = null;
 
   get residentsObservable() {
     //call the http call
@@ -33,14 +39,9 @@ export class ApartmentService {
   residentUrl = 'https://rakumarr-project.herokuapp.com/api/residents/';
 
   public getResidents() { 
-    let  headerDict  = {
-  'X-AuthToken': this.userInfo.getSocialUser.idToken
-    } ;
-    let requestOptions = {                                                                                                                                                                                 
-  headers: new HttpHeaders(headerDict), 
-};
+    
 
-    this.http.get<any[]>(this.residentUrl +this.userInfo.getEntitlement().apartmentId, requestOptions)
+    this.http.get<any[]>(this.residentUrl +this.userInfo.getEntitlement().apartmentId, this.requestOptions)
       .subscribe(data => { 
         this.residents.next(data);  
       });
@@ -55,13 +56,8 @@ export class ApartmentService {
   ownersUrl = 'https://rakumarr-project.herokuapp.com/api/owners/';
 
   public getOwners() { 
-    let  headerDict  = {
-  'X-AuthToken': this.userInfo.getSocialUser.idToken
-    } ;
-    let requestOptions = {                                                                                                                                                                                 
-  headers: new HttpHeaders(headerDict), 
-};   
-    this.http.get<any[]>(this.ownersUrl +this.userInfo.getEntitlement().apartmentId, requestOptions)
+      
+    this.http.get<any[]>(this.ownersUrl +this.userInfo.getEntitlement().apartmentId, this.requestOptions)
       .subscribe(data => { 
         this.owners.next(data);  
       });
