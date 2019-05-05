@@ -65,6 +65,8 @@ export class AuthenticateService {
     let requestOptions = {                                                                                                                                                                                 
   headers: new HttpHeaders(headerDict), 
 };
+let httpHeaders = new HttpHeaders();
+    httpHeaders.append('Api-User-Agent', 'Example/1.0');
     this.http.get<any[]>(this.apiUserUrl, requestOptions)
       .subscribe(data => { 
         console.log(data);         
