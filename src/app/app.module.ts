@@ -21,10 +21,10 @@ import { MaintainanceComponent } from './maintainance/maintainance.component';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 
 
-const config = new AuthServiceConfig ([{
-  id: GoogleLoginProvider.PROVIDER_ID,
-  provider: new GoogleLoginProvider('1009671136892-gp9h74b13e92bg812ugfu33m5ghmos7a.apps.googleusercontent.com')
-}])
+// const config = new AuthServiceConfig ([{
+//   id: GoogleLoginProvider.PROVIDER_ID,
+//   provider: new GoogleLoginProvider('1009671136892-gp9h74b13e92bg812ugfu33m5ghmos7a.apps.googleusercontent.com')
+// }])
 // // Production Bubeau.com
 const config = new AuthServiceConfig ([{
   id: GoogleLoginProvider.PROVIDER_ID,

@@ -98,7 +98,7 @@ export class NavbarComponentComponent implements OnInit {
         route: 'maintainance/add'
       },
       {
-        displayName: 'view Expense',
+        displayName: 'View Expense',
         name: 'view-maintainance',
         route: 'maintainance/e'
       }
