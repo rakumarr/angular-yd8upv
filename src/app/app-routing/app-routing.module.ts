@@ -9,7 +9,7 @@ import { OwnerComponent }   from './../owner/owner.component';
 import { HomeComponent }   from './../home/home.component';
 import { LoginComponent }   from './../login/login.component';
 import { MaintainanceComponent }   from './../maintainance/maintainance.component';
-import { TenantComponent }   from './../teanant/tenant.component';
+import { TenantComponent }   from './../tenant/tenant.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full', canActivate: [AuthGuard] },
@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'report', component: ReportComponentComponent, canActivate: [AuthGuard] },
   { path: 'owners', component: OwnerComponent, canActivate: [AuthGuard] },
   { path: 'maintainance', component: MaintainanceComponent, canActivate: [AuthGuard] },
-  { path: 'tenant', component: MaintainanceComponent, canActivate: [AuthGuard] }
+  { path: 'tenant', component: TenantComponent, canActivate: [AuthGuard] }
 ]
 
 @NgModule({
