@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SocialUser, AuthService, GoogleLoginProvider } from 'angularx-social-login';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { UserInfo } from '../model/user-info';
 import { Entitlement } from '../model/entitlement';
@@ -14,7 +14,9 @@ export class AuthenticateService {
   private entitlement: BehaviorSubject<Entitlement[]> = new BehaviorSubject<Entitlement[]>(null);
   private userEntitlement: BehaviorSubject<UserInfo> = new BehaviorSubject<UserInfo>(null);
 
-  constructor(private socialAuthService: AuthService, private http: HttpClient, private router: Router) { }
+  constructor(private socialAuthService: AuthService, private http: HttpClient, private router: Router) { 
+    
+  }
 
   get isLoggedIn() {
     return this.loggedIn.asObservable();
@@ -52,8 +54,18 @@ export class AuthenticateService {
 
   apiUserUrl = 'https://rakumarr-project.herokuapp.com/api/user/';
 
-  private getData(userData:SocialUser) {    
-    this.http.post<any[]>(this.apiUserUrl, userData.idToken)
+
+
+
+
+  private getData(userData:SocialUser) {   
+    let  headerDict  = {
+  'X-AuthToken': userData.idToken
+    } ;
+    let requestOptions = {                                                                                                                                                                                 
+  headers: new HttpHeaders(headerDict), 
+};
+    this.http.get<any[]>(this.apiUserUrl, requestOptions)
       .subscribe(data => { 
         console.log(data);         
         this.entitlement.next(data);  
