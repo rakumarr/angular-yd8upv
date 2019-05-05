@@ -55,9 +55,6 @@ export class AuthenticateService {
   apiUserUrl = 'https://rakumarr-project.herokuapp.com/api/user/';
 
 
-
-
-
   private getData(userData:SocialUser) {   
     let  headerDict  = {
   'X-AuthToken': userData.idToken
@@ -65,8 +62,7 @@ export class AuthenticateService {
     let requestOptions = {                                                                                                                                                                                 
   headers: new HttpHeaders(headerDict), 
 };
-let httpHeaders = new HttpHeaders();
-    httpHeaders.append('Api-User-Agent', 'Example/1.0');
+
     this.http.get<any[]>(this.apiUserUrl, requestOptions)
       .subscribe(data => { 
         console.log(data);         

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthenticateService } from './../auth/auth.service';
 import { UserInfo } from '../model/user-info';
 import { Residents } from '../model/residents';
@@ -22,6 +22,8 @@ export class ApartmentService {
     })
   }
 
+  
+
   get residentsObservable() {
     //call the http call
     this.getResidents();
@@ -30,7 +32,14 @@ export class ApartmentService {
 
   residentUrl = 'https://rakumarr-project.herokuapp.com/api/residents/';
 
-  public getResidents() {    
+  public getResidents() { 
+    let  headerDict  = {
+  'X-AuthToken': this.userInfo.getSocialUser.idToken
+    } ;
+    let requestOptions = {                                                                                                                                                                                 
+  headers: new HttpHeaders(headerDict), 
+};
+
     this.http.get<any[]>(this.residentUrl +'/'+this.userInfo.getEntitlement().apartmentId)
       .subscribe(data => { 
         this.residents.next(data);  
@@ -45,7 +54,13 @@ export class ApartmentService {
 
   ownersUrl = 'https://rakumarr-project.herokuapp.com/api/owners/';
 
-  public getOwners() {    
+  public getOwners() { 
+    let  headerDict  = {
+  'X-AuthToken': this.userInfo.getSocialUser.idToken
+    } ;
+    let requestOptions = {                                                                                                                                                                                 
+  headers: new HttpHeaders(headerDict), 
+};   
     this.http.get<any[]>(this.ownersUrl +'/'+this.userInfo.getEntitlement().apartmentId)
       .subscribe(data => { 
         this.owners.next(data);  
