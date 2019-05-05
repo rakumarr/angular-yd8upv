@@ -6,9 +6,20 @@
     </button>  
   <div class="collapse navbar-collapse" id="navbarMenu">
       <ul class="navbar-nav mr-auto">
-        <li *ngFor="let item of navbar">
+         <span *ngFor="let item of navbar">
+            <span *ngIf="item.children && item.children.length > 0">
+              <app-menu-item #menu [items]="item.children" [displayName]="item.displayName"></app-menu-item>
+            </span>
+            <span *ngIf="!item.children || item.children.length === 0">
+              <li>
+                <a class="nav-link" routerLink="{{item.route}}" data-toggle="collapse">{{item.displayName}}</a>
+              </li>              
+            </span>
+         </span>
+       
+        <!-- <li *ngFor="let item of navbar">
           <a class="nav-link" routerLink="{{item.route}}" data-toggle="collapse">{{item.displayName}}</a>
-        </li>
+        </li> -->
         
         <!-- <li class="nav-item">
           <a class="nav-link" routerLink="home">Home</a>

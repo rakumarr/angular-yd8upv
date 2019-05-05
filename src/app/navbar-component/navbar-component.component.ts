@@ -53,7 +53,29 @@ export class NavbarComponentComponent implements OnInit {
   {
     displayName: 'Tenant',
     name: 'tenant',
-    route: 'tenant'
+    route: 'tenant',
+    children: [
+      {
+        displayName: 'Detail',
+        name: 'detail-tenant',
+        route: 'tenant/detail'
+      },
+      {
+        displayName: 'Add',
+        name: 'add-tenant',
+        route: 'tenant/add'
+      },
+      {
+        displayName: 'Edit',
+        name: 'edit-tenant',
+        route: 'tenant/edit'
+      },
+      {
+        displayName: 'Delete',
+        name: 'delete-tenant',
+        route: 'tenant/delete'
+      }
+    ]
   },
   {
     displayName: 'Owners',
@@ -68,7 +90,19 @@ export class NavbarComponentComponent implements OnInit {
   {
     displayName: 'Maintainance',
     name: 'maintainance',
-    route: 'maintainance'
+    route: 'maintainance',
+    children: [
+      {
+        displayName: 'Add Expense',
+        name: 'add-maintainance',
+        route: 'maintainance/add'
+      },
+      {
+        displayName: 'view Expense',
+        name: 'view-maintainance',
+        route: 'maintainance/e'
+      }
+    ]
   }
   ]
 

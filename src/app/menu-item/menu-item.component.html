@@ -1,0 +1,8 @@
+<li class="nav-item dropdown">    
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" >{{displayName}}</a>
+          <div class="dropdown-menu">
+            <span *ngFor="let item of items">
+              <a class="dropdown-item" routerLink="{{item.route}}" >{{item.displayName}}</a>
+            </span>
+          </div>
+</li>
