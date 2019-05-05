@@ -55,17 +55,20 @@ export class NavbarComponentComponent implements OnInit {
     name: 'tenant',
     route: 'tenant'
   },
-
-   {
+  {
     displayName: 'Owners',
     name: 'owners',
     route: 'owners'
   },
-
   {
     displayName: 'My Profile',
     name: 'myprofile',
     route: 'myprofile'
+  },
+  {
+    displayName: 'Maintainance',
+    name: 'maintainance',
+    route: 'maintainance'
   }
   ]
 
