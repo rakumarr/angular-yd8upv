@@ -40,7 +40,7 @@ export class ApartmentService {
   headers: new HttpHeaders(headerDict), 
 };
 
-    this.http.get<any[]>(this.residentUrl +'/'+this.userInfo.getEntitlement().apartmentId)
+    this.http.get<any[]>(this.residentUrl +this.userInfo.getEntitlement().apartmentId, requestOptions)
       .subscribe(data => { 
         this.residents.next(data);  
       });
@@ -61,7 +61,7 @@ export class ApartmentService {
     let requestOptions = {                                                                                                                                                                                 
   headers: new HttpHeaders(headerDict), 
 };   
-    this.http.get<any[]>(this.ownersUrl +'/'+this.userInfo.getEntitlement().apartmentId)
+    this.http.get<any[]>(this.ownersUrl +this.userInfo.getEntitlement().apartmentId, requestOptions)
       .subscribe(data => { 
         this.owners.next(data);  
       });
