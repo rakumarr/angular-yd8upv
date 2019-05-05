@@ -19,6 +19,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { ApartmentService } from './service/apartment.service';
 import { MaintainanceComponent } from './maintainance/maintainance.component';
 import { MenuItemComponent } from './menu-item/menu-item.component';
+import { TenantComponent } from './tenant/tenant.component';
 
 
 // const config = new AuthServiceConfig ([{
@@ -37,7 +38,7 @@ export function provideConfig(){
 
 @NgModule({
   imports:      [ BrowserModule, FormsModule, AppRoutingModule, SocialLoginModule.initialize(config), HttpClientModule ],
-  declarations: [ AppComponent, HelloComponent, NavbarComponentComponent, ResidentsComponentComponent, ReportComponentComponent, OwnerComponent, HomeComponent, LoginComponent, MaintainanceComponent, MenuItemComponent ],
+  declarations: [ AppComponent, HelloComponent, NavbarComponentComponent, ResidentsComponentComponent, ReportComponentComponent, OwnerComponent, HomeComponent, LoginComponent, MaintainanceComponent, MenuItemComponent, TenantComponent ],
   bootstrap:    [ AppComponent ],
   providers: [{
     provide: AuthServiceConfig, useFactory: provideConfig
